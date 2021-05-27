@@ -29,7 +29,7 @@ public class OracleInitializer {
 
     @Bean
     DataSource dataSource() throws SQLException {
-        System.out.println("username: " + this.username + " | password: " + this.password + " | url: " + this.url);
+        // System.out.println("username: " + this.username + " | password: " + this.password + " | url: " + this.url);
         OracleDataSource dataSource = new OracleDataSource();
         dataSource.setUser(username);
         dataSource.setPassword(password);

@@ -1,0 +1,12 @@
+.header-main {
+    text-align: center;
+}
+
+.body-main {
+    text-align: center;
+    font-size: 16px;
+}
+
+table, th, td {
+    border: 1px solid black;
+}

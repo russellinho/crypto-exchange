@@ -1,0 +1,54 @@
+<html>
+    <link href="main.css" rel="stylesheet"/>
+    <script>
+      function onCreateWallet() {
+        document.getElementById("submitWallet").disabled = true;
+        document.getElementById("walletCreating").style.display = "block";
+      }
+    </script>
+  <head>
+    <title>Crypto Exchange - Homepage</title>
+  </head>
+  <body>
+    <h1 class="header-main" th:text="'Welcome, ' + ${username} + '!'"></h1>
+    <br/>
+    <p class="header-main" th:text="'ROUTING: ' + ${user.routing}"></p>
+    <br/>
+    <br/>
+    <div class="body-main" th:switch="${wallet}"> 
+        <div th:case="null">
+            <p>A wallet has not yet been created for this account. Please click the create button below to create one.</p>
+            <br/>
+            <br/>
+            <form onSubmit="return onCreateWallet();" th:action="@{/createWallet}" th:object="${user}" method="post">
+              <input type="hidden" th:field="*{email}" value="${user.email}" />
+              <input id="submitWallet" type="submit" value="Create Wallet" />
+            </form>
+            <br/>
+            <p id="walletCreating" style="color: red; display: none;">Creating wallet... please stay on this page. The page will refresh with your wallet when it is complete.</p>
+        </div>
+        <div th:case="*">
+            <p th:text="'Your wallet address: ' + ${wallet.address}"></p>
+            <br/>
+            <table style="margin-left: auto; margin-right: auto; width: 25%;">
+              <tr style="text-align: center;">
+                <th>Coin</th>
+                <th>Amount</th>
+              </tr>
+              <tr>
+                <td>BTC</td>
+                <td th:text="${wallet.btc}"></td>
+              </tr>
+              <tr>
+                <td>ETH</td>
+                <td th:text="${wallet.eth}"></td>
+              </tr>
+              <tr>
+                <td>CEL</td>
+                <td th:text="${wallet.cel}"></td>
+              </tr>
+            </table>
+        </div>
+    </div>
+  </body>
+</html>

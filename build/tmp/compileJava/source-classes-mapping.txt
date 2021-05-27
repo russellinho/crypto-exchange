@@ -1,6 +1,30 @@
+com/russ/cryptoexchange/controllers/CUserController.java
+ com.russ.cryptoexchange.controllers.CUserController
+com/russ/cryptoexchange/WalletGenerator.java
+ com.russ.cryptoexchange.WalletGenerator
+com/russ/cryptoexchange/domains/CUser.java
+ com.russ.cryptoexchange.domains.CUser
+com/russ/cryptoexchange/domains/Coin.java
+ com.russ.cryptoexchange.domains.Coin
+com/russ/cryptoexchange/repositories/WalletRepository.java
+ com.russ.cryptoexchange.repositories.WalletRepository
 com/russ/cryptoexchange/CryptoExchangeApplication.java
  com.russ.cryptoexchange.CryptoExchangeApplication
-com/russ/cryptoexchange/ServletInitializer.java
- com.russ.cryptoexchange.ServletInitializer
 com/russ/cryptoexchange/OracleInitializer.java
  com.russ.cryptoexchange.OracleInitializer
+com/russ/cryptoexchange/SecurityConfiguration.java
+ com.russ.cryptoexchange.SecurityConfiguration
+com/russ/cryptoexchange/ServletInitializer.java
+ com.russ.cryptoexchange.ServletInitializer
+com/russ/cryptoexchange/domains/Wallet.java
+ com.russ.cryptoexchange.domains.Wallet
+com/russ/cryptoexchange/repositories/CUserRepository.java
+ com.russ.cryptoexchange.repositories.CUserRepository
+com/russ/cryptoexchange/services/CUserService.java
+ com.russ.cryptoexchange.services.CUserService
+com/russ/cryptoexchange/services/WalletService.java
+ com.russ.cryptoexchange.services.WalletService
+com/russ/cryptoexchange/controllers/HomeController.java
+ com.russ.cryptoexchange.controllers.HomeController
+com/russ/cryptoexchange/controllers/WalletController.java
+ com.russ.cryptoexchange.controllers.WalletController
