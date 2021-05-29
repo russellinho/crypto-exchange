@@ -1,6 +1,9 @@
 package com.russ.cryptoexchange.services;
 
 import java.util.ArrayList;
+
+import javax.xml.bind.ValidationException;
+
 import com.russ.cryptoexchange.domains.CUser;
 import com.russ.cryptoexchange.repositories.CUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,5 +23,18 @@ public class CUserService {
 
     public CUser loadCUser(String email) {
         return cUserRepository.findByEmail(email);
+    }
+
+    public void depositFiatForUser(CUser cUser, double amount) {
+        cUser.setFiat(cUser.getFiat() + amount);
+        cUserRepository.save(cUser);
+    }
+
+    public void withdrawFiatForUser(CUser cUser, double amount) throws ValidationException {
+        if (amount > cUser.getFiat()) {
+            throw new ValidationException("Insufficient funds! Please check your balance and try again.");
+        }
+        cUser.setFiat(cUser.getFiat() - amount);
+        cUserRepository.save(cUser);
     }
 }

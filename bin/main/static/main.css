@@ -7,6 +7,14 @@
     font-size: 16px;
 }
 
-table, th, td {
+table.bordered1 {
+    border: 1px solid black;
+}
+
+th.bordered1 {
+    border: 1px solid black;
+}
+
+td.bordered1 {
     border: 1px solid black;
 }

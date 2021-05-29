@@ -30,22 +30,43 @@
         <div th:case="*">
             <p th:text="'Your wallet address: ' + ${wallet.address}"></p>
             <br/>
-            <table style="margin-left: auto; margin-right: auto; width: 25%;">
+            <table class="bordered1" style="margin-left: auto; margin-right: auto; width: 25%;">
               <tr style="text-align: center;">
-                <th>Coin</th>
-                <th>Amount</th>
+                <th class="bordered1">Coin</th>
+                <th class="bordered1">Amount</th>
               </tr>
               <tr>
-                <td>BTC</td>
-                <td th:text="${wallet.btc}"></td>
+                <td class="bordered1">BTC</td>
+                <td class="bordered1" th:text="${wallet.btc}"></td>
               </tr>
               <tr>
-                <td>ETH</td>
-                <td th:text="${wallet.eth}"></td>
+                <td class="bordered1">ETH</td>
+                <td class="bordered1" th:text="${wallet.eth}"></td>
               </tr>
               <tr>
-                <td>CEL</td>
-                <td th:text="${wallet.cel}"></td>
+                <td class="bordered1">CEL</td>
+                <td class="bordered1" th:text="${wallet.cel}"></td>
+              </tr>
+            </table>
+            <br/>
+            <h4 class="header-main" th:text="'USD Balance: $' + ${user.fiatToString()}"></h4>
+            <br/>
+            <br/>
+            <table style="margin-left: auto; margin-right: auto;">
+              <tr>
+                <td>
+                  <form th:action="@{/deposit}" th:object="${user}" method="post">
+                    <input type="hidden" th:field="*{routing}" value="${user.routing}" />
+                    <input type="hidden" th:field="*{fiat}" value="${user.fiat}" />
+                    <input type="submit" value="Deposit Fiat" />
+                  </form>
+                </td>
+                <td>
+                  <form th:action="@{/withdraw}" th:object="${withdrawForm}" method="post">
+                    <input type="hidden" th:field="*{cUser}" value="${user}" />
+                    <input type="submit" value="Withdraw Fiat" />
+                  </form>
+                </td>
               </tr>
             </table>
         </div>

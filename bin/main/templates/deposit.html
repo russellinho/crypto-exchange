@@ -1,0 +1,39 @@
+<html>
+    <link href="main.css" rel="stylesheet"/>
+  <head>
+    <title>Crypto Exchange - Deposit Fiat</title>
+  </head>
+  <body>
+    <h1 class="header-main">Deposit Fiat Currency</h1>
+    <br/>
+    <br/>
+    <div class="body-main">
+        <p>
+            You can make an ACH deposit from your linked bank account here.
+        </p>
+        <br/>
+        <p class="header-main" th:text="'ROUTING: ' + ${depositForm.cUser.routing}"></p>
+        <br/>
+        <br/>
+        <p th:text="'Current USD Balance: $' + ${depositForm.cUser.fiatToString()}"></p>
+        <br/>
+        <br/>
+        <form th:action="@{/deposit}" th:object="${depositForm}" method="post">
+          <!-- <input type="hidden" th:field="*{cUser}" value="${user}" /> -->
+          <input type="text" th:field="*{amount}" />
+          <input type="submit" value="Deposit" />
+        </form>
+        <br/>
+        <br/>
+        <table style="margin-left: auto; margin-right: auto;">
+          <tr>
+            <td>
+              <form th:action="@{/}" method="get">
+                <input type="submit" value="Return Home" />
+              </form>
+            </td>
+          </tr>
+        </table>
+    </div>
+  </body>
+</html>

@@ -1,5 +1,7 @@
 package com.russ.cryptoexchange.domains;
 
+import java.text.DecimalFormat;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -26,24 +28,27 @@ public class CUser {
     private String email;
     private String walletAddress;
     private String routing;
+    private Double fiat;
 
     public CUser() {}
 
-    public CUser(Long id, String firstName, String lastName, String email, String walletAddress, String routing) {
+    public CUser(Long id, String firstName, String lastName, String email, String walletAddress, String routing, Double fiat) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.walletAddress = walletAddress;
         this.routing = routing;
+        this.fiat = fiat;
     }
 
-    public CUser(String firstName, String lastName, String email, String walletAddress, String routing) {
+    public CUser(String firstName, String lastName, String email, String walletAddress, String routing, Double fiat) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.walletAddress = walletAddress;
         this.routing = routing;
+        this.fiat = fiat;
     }
 
     public void setFirstName(String firstName) {
@@ -66,6 +71,10 @@ public class CUser {
         this.routing = routing;
     }
 
+    public void setFiat(Double fiat) {
+        this.fiat = fiat;
+    }
+
     public String getFirstName() {
         return this.firstName;
     }
@@ -84,5 +93,13 @@ public class CUser {
 
     public String getRouting() {
         return this.routing;
+    }
+
+    public Double getFiat() {
+        return this.fiat;
+    }
+
+    public String fiatToString() {
+        return String.format("%.2f", getFiat());
     }
 }
