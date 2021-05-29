@@ -62,8 +62,9 @@
                   </form>
                 </td>
                 <td>
-                  <form th:action="@{/withdraw}" th:object="${withdrawForm}" method="post">
-                    <input type="hidden" th:field="*{cUser}" value="${user}" />
+                  <form th:action="@{/withdraw}" th:object="${user}" method="post">
+                    <input type="hidden" th:field="*{routing}" value="${user.routing}" />
+                    <input type="hidden" th:field="*{fiat}" value="${user.fiat}" />
                     <input type="submit" value="Withdraw Fiat" />
                   </form>
                 </td>

@@ -4,6 +4,36 @@
     <title>Crypto Exchange - Withdraw Fiat</title>
   </head>
   <body>
-      
+    <h1 class="header-main">Withdraw Fiat Currency</h1>
+    <br/>
+    <br/>
+    <div class="body-main">
+        <p>
+            You can make an ACH withdrawal from your linked bank account here.
+        </p>
+        <br/>
+        <p class="header-main" th:text="'ROUTING: ' + ${withdrawForm.cUser.routing}"></p>
+        <br/>
+        <br/>
+        <p th:text="'Current USD Balance: $' + ${withdrawForm.cUser.fiatToString()}"></p>
+        <br/>
+        <br/>
+        <form th:action="@{/withdraw}" th:object="${withdrawForm}" method="post">
+          <!-- <input type="hidden" th:field="*{cUser}" value="${user}" /> -->
+          <input type="text" th:field="*{amount}" />
+          <input type="submit" value="Withdraw" />
+        </form>
+        <br/>
+        <br/>
+        <table style="margin-left: auto; margin-right: auto;">
+          <tr>
+            <td>
+              <form th:action="@{/}" method="get">
+                <input type="submit" value="Return Home" />
+              </form>
+            </td>
+          </tr>
+        </table>
+    </div>
   </body>
 </html>

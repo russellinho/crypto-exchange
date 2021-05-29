@@ -54,8 +54,9 @@ public class HomeController {
     }
 
     @PostMapping("/withdraw")
-    public String withdrawFiatForUser(@ModelAttribute("withdrawForm") WithdrawForm withdrawForm, Model model) {
-        model.addAttribute("withdrawForm", withdrawForm);
+    public String withdrawFiatForUser(@ModelAttribute("user") CUser cUser, Model model) {
+        WithdrawForm w = new WithdrawForm(cUser, null);
+        model.addAttribute("withdrawForm", w);
         return "withdraw";
     }
 }
