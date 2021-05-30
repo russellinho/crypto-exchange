@@ -4,6 +4,11 @@
     <title>Crypto Exchange - Withdraw Fiat</title>
   </head>
   <body>
+    <div id="displayMessage" th:if="${message != null}">
+      <p style="color: red;" th:if="${error}" th:text="${message}"></p>
+      <p style="color: green;" th:unless="${error}" th:text="${message}"></p>
+      <br/>
+    </div>
     <h1 class="header-main">Withdraw Fiat Currency</h1>
     <br/>
     <br/>
@@ -18,9 +23,15 @@
         <p th:text="'Current USD Balance: $' + ${withdrawForm.cUser.fiatToString()}"></p>
         <br/>
         <br/>
-        <form th:action="@{/withdraw}" th:object="${withdrawForm}" method="post">
-          <!-- <input type="hidden" th:field="*{cUser}" value="${user}" /> -->
-          <input type="text" th:field="*{amount}" />
+        <form th:action="@{/confirmWithdraw}" th:object="${withdrawForm}" method="post">
+          <input type="hidden" th:field="*{cUser.id}" value="${withdrawForm.cUser.id}" />
+          <input type="hidden" th:field="*{cUser.email}" value="${withdrawForm.cUser.email}" />
+          <input type="hidden" th:field="*{cUser.firstName}" value="${withdrawForm.cUser.firstName}" />
+          <input type="hidden" th:field="*{cUser.lastName}" value="${withdrawForm.cUser.lastName}" />
+          <input type="hidden" th:field="*{cUser.walletAddress}" value="${withdrawForm.cUser.walletAddress}" />
+          <input type="hidden" th:field="*{cUser.routing}" value="${withdrawForm.cUser.routing}" />
+          <input type="hidden" th:field="*{cUser.fiat}" value="${withdrawForm.cUser.fiat}" />
+          <input type="text" th:field="*{amount}" value="${withdrawForm.amount}" />
           <input type="submit" value="Withdraw" />
         </form>
         <br/>

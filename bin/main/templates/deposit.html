@@ -4,6 +4,11 @@
     <title>Crypto Exchange - Deposit Fiat</title>
   </head>
   <body>
+    <div id="displayMessage" th:if="${message != null}" style="text-align: center;">
+      <p style="color: red;" th:if="${error}" th:text="${message}"></p>
+      <p style="color: green;" th:unless="${error}" th:text="${message}"></p>
+      <br/>
+    </div>
     <h1 class="header-main">Deposit Fiat Currency</h1>
     <br/>
     <br/>
@@ -18,9 +23,15 @@
         <p th:text="'Current USD Balance: $' + ${depositForm.cUser.fiatToString()}"></p>
         <br/>
         <br/>
-        <form th:action="@{/deposit}" th:object="${depositForm}" method="post">
-          <!-- <input type="hidden" th:field="*{cUser}" value="${user}" /> -->
-          <input type="text" th:field="*{amount}" />
+        <form th:action="@{/confirmDeposit}" th:object="${depositForm}" method="post">
+          <input type="hidden" th:field="*{cUser.id}" value="${depositForm.cUser.id}" />
+          <input type="hidden" th:field="*{cUser.email}" value="${depositForm.cUser.email}" />
+          <input type="hidden" th:field="*{cUser.firstName}" value="${depositForm.cUser.firstName}" />
+          <input type="hidden" th:field="*{cUser.lastName}" value="${depositForm.cUser.lastName}" />
+          <input type="hidden" th:field="*{cUser.walletAddress}" value="${depositForm.cUser.walletAddress}" />
+          <input type="hidden" th:field="*{cUser.routing}" value="${depositForm.cUser.routing}" />
+          <input type="hidden" th:field="*{cUser.fiat}" value="${depositForm.cUser.fiat}" />
+          <input type="text" th:field="*{amount}" value="${depositForm.amount}" />
           <input type="submit" value="Deposit" />
         </form>
         <br/>

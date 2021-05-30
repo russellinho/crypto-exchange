@@ -10,7 +10,7 @@
     <title>Crypto Exchange - Homepage</title>
   </head>
   <body>
-    <h1 class="header-main" th:text="'Welcome, ' + ${username} + '!'"></h1>
+    <h1 class="header-main" th:text="'Welcome, ' + ${user.firstName} + '!'"></h1>
     <br/>
     <p class="header-main" th:text="'ROUTING: ' + ${user.routing}"></p>
     <br/>
@@ -56,6 +56,11 @@
               <tr>
                 <td>
                   <form th:action="@{/deposit}" th:object="${user}" method="post">
+                    <input type="hidden" th:field="*{id}" value="${user.id}" />
+                    <input type="hidden" th:field="*{firstName}" value="${user.firstName}" />
+                    <input type="hidden" th:field="*{lastName}" value="${user.lastName}" />
+                    <input type="hidden" th:field="*{email}" value="${user.email}" />
+                    <input type="hidden" th:field="*{walletAddress}" value="${user.walletAddress}" />
                     <input type="hidden" th:field="*{routing}" value="${user.routing}" />
                     <input type="hidden" th:field="*{fiat}" value="${user.fiat}" />
                     <input type="submit" value="Deposit Fiat" />
@@ -63,6 +68,11 @@
                 </td>
                 <td>
                   <form th:action="@{/withdraw}" th:object="${user}" method="post">
+                    <input type="hidden" th:field="*{id}" value="${user.id}" />
+                    <input type="hidden" th:field="*{firstName}" value="${user.firstName}" />
+                    <input type="hidden" th:field="*{lastName}" value="${user.lastName}" />
+                    <input type="hidden" th:field="*{email}" value="${user.email}" />
+                    <input type="hidden" th:field="*{walletAddress}" value="${user.walletAddress}" />
                     <input type="hidden" th:field="*{routing}" value="${user.routing}" />
                     <input type="hidden" th:field="*{fiat}" value="${user.fiat}" />
                     <input type="submit" value="Withdraw Fiat" />
