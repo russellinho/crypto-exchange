@@ -1,0 +1,35 @@
+<html>
+    <link href="main.css" rel="stylesheet"/>
+    <head>
+        <title>Crypto Exchange - Exchange</title>
+    </head>
+    <body>
+        <h1 class="header-main">Exchange</h1>
+        <br/>
+        <table class="bordered1" style="margin-left: auto; margin-right: auto; width: 40%;">
+            <tr style="text-align: center;">
+                <th class="bordered1">Coin</th>
+                <th class="bordered1">Price (USD)</th>
+                <th class="bordered1">Availability</th>
+            </tr>
+            <tr>
+                <td class="bordered1">BTC</td>
+                <td class="bordered1" th:text="'$' + ${BTC.price}"></td>
+                <td class="bordered1" th:text="${BTC.quantity}"></td>
+            </tr>
+            <tr>
+                <td class="bordered1">ETH</td>
+                <td class="bordered1" th:text="'$' + ${ETH.price}"></td>
+                <td class="bordered1" th:text="${ETH.quantity}"></td>
+            </tr>
+            <tr>
+                <td class="bordered1">CEL</td>
+                <td class="bordered1" th:text="'$' + ${CEL.price}"></td>
+                <td class="bordered1" th:text="${CEL.quantity}"></td>
+            </tr>
+        </table>
+        <br/>
+        <h4 class="header-main" th:text="'USD Balance: $' + ${user.fiatToString()}"></h4>
+        
+    </body>
+</html>
