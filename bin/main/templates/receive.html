@@ -1,0 +1,35 @@
+<html>
+    <link href="main.css" rel="stylesheet"/>
+  <head>
+    <title>Crypto Exchange - Receive Coin</title>
+  </head>
+  <body>
+    <div id="displayMessage" th:if="${message != null}" style="text-align: center;">
+      <p style="color: red;" th:if="${error}" th:text="${message}"></p>
+      <p style="color: green;" th:unless="${error}" th:text="${message}"></p>
+      <br/>
+    </div>
+    <h1 class="header-main">Receive Coins</h1>
+    <br/>
+    <br/>
+    <div class="body-main">
+        <p>
+          You can receive coins from other wallets here.
+        </p>
+        <br/>
+        <br/>
+        <p>
+          To receive coins, send the wallet address below to the sender. They should send coins directly to this public address. Please ensure that there are no typos before sending as sending cryptocurrency is irreversible.
+        </p>
+        <br/>
+        <br/>
+        <p>Your wallet address:</p>
+        <h3 class="header-main" th:text="${receiveForm.cUser.walletAddress}"></h3>
+        <br/>
+        <br/>
+        <form th:action="@{/}" method="get">
+          <input type="submit" value="Return Home" />
+        </form>
+    </div>
+  </body>
+</html>

@@ -4,7 +4,7 @@
     <title>Crypto Exchange - Withdraw Fiat</title>
   </head>
   <body>
-    <div id="displayMessage" th:if="${message != null}">
+    <div id="displayMessage" th:if="${message != null}" style="text-align: center;">
       <p style="color: red;" th:if="${error}" th:text="${message}"></p>
       <p style="color: green;" th:unless="${error}" th:text="${message}"></p>
       <br/>

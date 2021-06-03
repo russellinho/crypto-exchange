@@ -25,10 +25,15 @@ public class CoinService {
     }
 
     public void updateLiquidity(Coin coin, double amount) throws ValidationException {
-        if (coin.getQuantity() < amount) {
+        double newAmount = coin.getQuantity() + amount;
+        if (newAmount < 0) {
             throw new ValidationException("There is not enough of this coin to purchase!");
         }
-        coin.setQuantity(coin.getQuantity() - amount);
+        coin.setQuantity(newAmount);
         coinRepository.save(coin);
+    }
+
+    public Coin getCoinBySymbol(String name) {
+        return coinRepository.findByName(name);
     }
 }

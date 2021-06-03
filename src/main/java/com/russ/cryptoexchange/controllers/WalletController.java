@@ -20,8 +20,4 @@ public class WalletController {
         this.walletService = walletService;
     }
 
-    // @GetMapping
-    // public Wallet getWallet() {
-    //     return walletService.getWallet();
-    // }
 }

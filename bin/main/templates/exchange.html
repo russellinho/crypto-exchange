@@ -1,35 +1,106 @@
 <html>
     <link href="main.css" rel="stylesheet"/>
+    <script>
+        function onOrderTypeSelect() {
+            if (document.getElementById("orderBuy").checked) {
+                document.getElementById("orderBuy").checked = false;
+                document.getElementById("orderSell").checked = true;
+            } else {
+                document.getElementById("orderBuy").checked = true;
+                document.getElementById("orderSell").checked = false;
+            }
+        }
+    </script>
     <head>
         <title>Crypto Exchange - Exchange</title>
     </head>
     <body>
+        <div id="displayMessage" th:if="${message != null}" style="text-align: center;">
+            <p style="color: red;" th:if="${error}" th:text="${message}"></p>
+            <p style="color: green;" th:unless="${error}" th:text="${message}"></p>
+            <br/>
+        </div>
         <h1 class="header-main">Exchange</h1>
         <br/>
         <table class="bordered1" style="margin-left: auto; margin-right: auto; width: 40%;">
             <tr style="text-align: center;">
+                <th class="bordered1">Symbol</th>
                 <th class="bordered1">Coin</th>
                 <th class="bordered1">Price (USD)</th>
                 <th class="bordered1">Availability</th>
             </tr>
             <tr>
-                <td class="bordered1">BTC</td>
-                <td class="bordered1" th:text="'$' + ${BTC.price}"></td>
-                <td class="bordered1" th:text="${BTC.quantity}"></td>
+                <td class="bordered1"><img src="btc.png" style="width: 25px; height: 25px;" />&nbsp;BTC</td>
+                <td class="bordered1">Bitcoin</td>
+                <td class="bordered1" th:text="'$' + ${BTC.priceToString()}"></td>
+                <td class="bordered1" th:text="${BTC.quantityToString()}"></td>
             </tr>
             <tr>
-                <td class="bordered1">ETH</td>
-                <td class="bordered1" th:text="'$' + ${ETH.price}"></td>
-                <td class="bordered1" th:text="${ETH.quantity}"></td>
+                <td class="bordered1"><img src="eth.png" style="width: 25px; height: 25px;" />&nbsp;ETH</td>
+                <td class="bordered1">Ethereum</td>
+                <td class="bordered1" th:text="'$' + ${ETH.priceToString()}"></td>
+                <td class="bordered1" th:text="${ETH.quantityToString()}"></td>
             </tr>
             <tr>
-                <td class="bordered1">CEL</td>
-                <td class="bordered1" th:text="'$' + ${CEL.price}"></td>
-                <td class="bordered1" th:text="${CEL.quantity}"></td>
+                <td class="bordered1"><img src="cel.png" style="width: 25px; height: 25px;" />&nbsp;CEL</td>
+                <td class="bordered1">Celsius</td>
+                <td class="bordered1" th:text="'$' + ${CEL.priceToString()}"></td>
+                <td class="bordered1" th:text="${CEL.quantityToString()}"></td>
             </tr>
         </table>
         <br/>
-        <h4 class="header-main" th:text="'USD Balance: $' + ${user.fiatToString()}"></h4>
-        
+        <h4 class="header-main" th:text="'USD Balance: $' + ${transactForm.cUser.fiatToString()}"></h4>
+        <br/>
+        <br/>
+        <form th:action="@{/placeOrder}" th:object="${transactForm}" style="text-align: center;" method="post">
+            <table id="orderType" style="margin-left: auto; margin-right: auto;">
+                <tr>
+                    <td>
+                        <p>Order Type:&nbsp;</p>
+                    </td>
+                    <td>
+                        <label for="orderBuy">Buy</label>
+                        <input type="radio" id="orderBuy" th:field="*{buy}" th:value="true" checked>
+                    </td>
+                    <td>
+                        <label for="orderSell">Sell</label>
+                        <input type="radio" id="orderSell" th:field="*{buy}" th:value="false">
+                    </td>
+                </tr>
+            </table>
+            <br/>
+            <select id="coinSelect" th:field="*{selectedCoin}">
+                <option th:value="'BTC'" th:text="BTC" selected></option>
+                <option th:value="'ETH'" th:text="ETH"></option>
+                <option th:value="'CEL'" th:text="CEL"></option>
+            </select>
+
+            <input type="hidden" th:field="*{cUser.id}" value="${transactForm.cUser.id}" />
+            <input type="hidden" th:field="*{cUser.email}" value="${transactForm.cUser.email}" />
+            <input type="hidden" th:field="*{cUser.firstName}" value="${transactForm.cUser.firstName}" />
+            <input type="hidden" th:field="*{cUser.lastName}" value="${transactForm.cUser.lastName}" />
+            <input type="hidden" th:field="*{cUser.walletAddress}" value="${transactForm.cUser.walletAddress}" />
+            <input type="hidden" th:field="*{cUser.routing}" value="${transactForm.cUser.routing}" />
+            <input type="hidden" th:field="*{cUser.fiat}" value="${transactForm.cUser.fiat}" />
+
+            <input type="hidden" th:field="*{wallet.address}" value="${transactForm.wallet.address}" />
+            <input type="hidden" th:field="*{wallet.btc}" value="${transactForm.wallet.btc}" />
+            <input type="hidden" th:field="*{wallet.eth}" value="${transactForm.wallet.eth}" />
+            <input type="hidden" th:field="*{wallet.cel}" value="${transactForm.wallet.cel}" />
+
+            <input type="text" th:field="*{coinAmount}" value="${transactForm.coinAmount}" />
+            <br/>
+            <br/>
+            <input type="submit" value="Place Order" />
+        </form>
+        <table style="margin-left: auto; margin-right: auto;">
+            <tr>
+              <td>
+                <form th:action="@{/}" method="get">
+                  <input type="submit" value="Return Home" />
+                </form>
+              </td>
+            </tr>
+        </table>
     </body>
 </html>

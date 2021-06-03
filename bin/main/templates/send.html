@@ -1,0 +1,76 @@
+<html>
+  <link href="main.css" rel="stylesheet"/>
+  <script th:inline="javascript">
+    function updateBalance(coin) {
+      if (coin === "BTC") {
+        document.getElementById("balance").innerText = "BTC Balance: " + /*[[${sendForm.wallet.btc}]]*/ + " BTC";
+      } else if (coin === "ETH") {
+        document.getElementById("balance").innerText = "ETH Balance: " + /*[[${sendForm.wallet.eth}]]*/ + " ETH";
+      } else if (coin === "CEL") {
+        document.getElementById("balance").innerText = "CEL Balance: " + /*[[${sendForm.wallet.cel}]]*/ + " CEL";
+      }
+    }
+    window.onload = function() {
+      updateBalance(document.getElementById("coinSelect").value);
+    };
+  </script>
+  <head>
+    <title>Crypto Exchange - Send Coins</title>
+  </head>
+  <body>
+    <div id="displayMessage" th:if="${message != null}" style="text-align: center;">
+      <p style="color: red;" th:if="${error}" th:text="${message}"></p>
+      <p style="color: green;" th:unless="${error}" th:text="${message}"></p>
+      <br/>
+    </div>
+    <h1 class="header-main">Send Coins</h1>
+    <br/>
+    <br/>
+    <div class="body-main">
+        <p>
+            You can send cryptocurrency here.
+        </p>
+        <br/>
+        <p>
+          Please select the coin you'd like to send below and enter the wallet address of the recipient.
+        </p>
+        <br/>
+        <br/>
+        <h2 id="balance" class="header-main">BTC Balance: 0 BTC</h2>
+        <br/>
+        <form th:action="@{/confirmSend}" th:object="${sendForm}" method="post">
+          <input type="hidden" th:field="*{wallet.address}" value="${sendForm.wallet.address}" />
+          <input type="hidden" th:field="*{wallet.btc}" value="${sendForm.wallet.btc}" />
+          <input type="hidden" th:field="*{wallet.eth}" value="${sendForm.wallet.eth}" />
+          <input type="hidden" th:field="*{wallet.cel}" value="${sendForm.wallet.cel}" />
+          <label for="coinSelect">Coin:</label>
+          <select id="coinSelect" th:field="*{selectedCoin}" onchange="updateBalance(this.value)">
+            <option th:value="'BTC'" th:text="BTC" selected></option>
+            <option th:value="'ETH'" th:text="ETH"></option>
+            <option th:value="'CEL'" th:text="CEL"></option>
+          </select>
+          <br/>
+          <br/>
+          <label for="sendAmount">Amount:</label>
+          <input id="sendAmount" type="text" th:field="*{amount}" value="${sendForm.amount}" />
+          <br/>
+          <label for="recipient">Address:</label>
+          <input id="recipient" type="text" th:field="*{recipientAddress}" value="${sendForm.recipientAddress}" />
+          <br/>
+          <br/>
+          <input type="submit" value="Send" />
+        </form>
+        <br/>
+        <br/>
+        <table style="margin-left: auto; margin-right: auto;">
+          <tr>
+            <td>
+              <form th:action="@{/}" method="get">
+                <input type="submit" value="Return Home" />
+              </form>
+            </td>
+          </tr>
+        </table>
+    </div>
+  </body>
+</html>

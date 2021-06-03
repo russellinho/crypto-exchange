@@ -1,5 +1,6 @@
 <html>
     <link href="main.css" rel="stylesheet"/>
+    <link href="cui-standard.min.css" rel="stylesheet"/>
     <script>
       function onCreateWallet() {
         document.getElementById("submitWallet").disabled = true;
@@ -30,21 +31,21 @@
         <div th:case="*">
             <p th:text="'Your wallet address: ' + ${wallet.address}"></p>
             <br/>
-            <table class="bordered1" style="margin-left: auto; margin-right: auto; width: 25%;">
+            <table class="bordered1 table" style="margin-left: auto; margin-right: auto; width: 25%;">
               <tr style="text-align: center;">
                 <th class="bordered1">Coin</th>
                 <th class="bordered1">Amount</th>
               </tr>
               <tr>
-                <td class="bordered1">BTC</td>
+                <td class="bordered1"><img src="btc.png" style="width: 25px; height: 25px;" />&nbsp;BTC</td>
                 <td class="bordered1" th:text="${wallet.btc}"></td>
               </tr>
               <tr>
-                <td class="bordered1">ETH</td>
+                <td class="bordered1"><img src="eth.png" style="width: 25px; height: 25px;" />&nbsp;ETH</td>
                 <td class="bordered1" th:text="${wallet.eth}"></td>
               </tr>
               <tr>
-                <td class="bordered1">CEL</td>
+                <td class="bordered1"><img src="cel.png" style="width: 25px; height: 25px;" />&nbsp;CEL</td>
                 <td class="bordered1" th:text="${wallet.cel}"></td>
               </tr>
             </table>
@@ -79,7 +80,55 @@
                   </form>
                 </td>
               </tr>
+              <tr>
+                <td>
+                  <form th:action="@{/send}" th:object="${sendForm}" method="post">
+                    <input type="hidden" th:field="*{cUser.id}" value="${user.id}" />
+                    <input type="hidden" th:field="*{cUser.firstName}" value="${user.firstName}" />
+                    <input type="hidden" th:field="*{cUser.lastName}" value="${user.lastName}" />
+                    <input type="hidden" th:field="*{cUser.email}" value="${user.email}" />
+                    <input type="hidden" th:field="*{cUser.walletAddress}" value="${user.walletAddress}" />
+                    <input type="hidden" th:field="*{cUser.routing}" value="${user.routing}" />
+                    <input type="hidden" th:field="*{cUser.fiat}" value="${user.fiat}" />
+
+                    <input type="hidden" th:field="*{wallet.address}" value="${wallet.address}" />
+                    <input type="hidden" th:field="*{wallet.btc}" value="${wallet.btc}" />
+                    <input type="hidden" th:field="*{wallet.eth}" value="${wallet.eth}" />
+                    <input type="hidden" th:field="*{wallet.cel}" value="${wallet.cel}" />
+
+                    <input type="submit" value="Send Coins" />
+                  </form>
+                </td>
+                <td>
+                  <form th:action="@{/receive}" th:object="${receiveForm}" method="post">
+                    <input type="hidden" th:field="*{cUser.id}" value="${user.id}" />
+                    <input type="hidden" th:field="*{cUser.firstName}" value="${user.firstName}" />
+                    <input type="hidden" th:field="*{cUser.lastName}" value="${user.lastName}" />
+                    <input type="hidden" th:field="*{cUser.email}" value="${user.email}" />
+                    <input type="hidden" th:field="*{cUser.walletAddress}" value="${user.walletAddress}" />
+                    <input type="hidden" th:field="*{cUser.routing}" value="${user.routing}" />
+                    <input type="hidden" th:field="*{cUser.fiat}" value="${user.fiat}" />
+                    <input type="submit" value="Receive Coins" />
+                  </form>
+                </td>
+              </tr>
             </table>
+            <br/>
+            <form th:action="@{/exchange}" th:object="${transactForm}" method="post">
+              <input type="hidden" th:field="*{cUser.id}" value="${user.id}" />
+              <input type="hidden" th:field="*{cUser.email}" value="${user.email}" />
+              <input type="hidden" th:field="*{cUser.firstName}" value="${user.firstName}" />
+              <input type="hidden" th:field="*{cUser.lastName}" value="${user.lastName}" />
+              <input type="hidden" th:field="*{cUser.walletAddress}" value="${user.walletAddress}" />
+              <input type="hidden" th:field="*{cUser.routing}" value="${user.routing}" />
+              <input type="hidden" th:field="*{cUser.fiat}" value="${user.fiat}" />
+
+              <input type="hidden" th:field="*{wallet.address}" value="${wallet.address}" />
+              <input type="hidden" th:field="*{wallet.btc}" value="${wallet.btc}" />
+              <input type="hidden" th:field="*{wallet.eth}" value="${wallet.eth}" />
+              <input type="hidden" th:field="*{wallet.cel}" value="${wallet.cel}" />
+              <input type="submit" value="Exchange" />
+            </form>
         </div>
     </div>
   </body>

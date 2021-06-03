@@ -12,15 +12,17 @@ public class Coin {
     private Long id;
     private String name;
     private String description;
-    private String thumbnail;
+    private String thumb;
     private Double price;
     private Double quantity;
 
-    public Coin(Long id, String name, String description, String thumbnail, Double price, Double quantity) {
+    public Coin() {}
+
+    public Coin(Long id, String name, String description, String thumb, Double price, Double quantity) {
         this.id = id;
         this.name = name;
         this.description = description;
-        this.thumbnail = thumbnail;
+        this.thumb = thumb;
         this.price = price;
         this.quantity = quantity;
     }
@@ -37,8 +39,8 @@ public class Coin {
         return this.description;
     }
 
-    public String getThumbnail() {
-        return this.thumbnail;
+    public String getThumb() {
+        return this.thumb;
     }
 
     public Double getPrice() {
@@ -61,8 +63,8 @@ public class Coin {
         this.description = description;
     }
 
-    public void setThumbnail(String thumbnail) {
-        this.thumbnail = thumbnail;
+    public void setThumb(String thumb) {
+        this.thumb = thumb;
     }
 
     public void setPrice(Double price) {
@@ -71,5 +73,13 @@ public class Coin {
 
     public void setQuantity(Double quantity) {
         this.quantity = quantity;
+    }
+
+    public String priceToString() {
+        return String.format("%.2f", getPrice());
+    }
+
+    public String quantityToString() {
+        return String.format("%12.5f", getQuantity());
     }
 }
